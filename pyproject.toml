@@ -1,0 +1,27 @@
+[project]
+name = "orders-service"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "LuisReyesAxity",email = "112987252+LuisReyesAxity@users.noreply.github.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+]
+
+[tool.poetry]
+packages = [{include = "orders_service", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "black (>=26.1.0,<27.0.0)",
+    "isort (>=7.0.0,<8.0.0)",
+    "ruff (>=0.15.1,<0.16.0)",
+    "mypy (>=1.19.1,<2.0.0)",
+    "pytest (>=9.0.2,<10.0.0)"
+]
