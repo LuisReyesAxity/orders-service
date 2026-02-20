@@ -1,0 +1,15 @@
+[project]
+name = "lab01-entorno"
+version = "0.1.0"
+description = "Lab 01 - Entorno y herramientas"
+authors = [
+    {name = "LuisReyesAxity",email = "112987252+LuisReyesAxity@users.noreply.github.com"}
+]
+requires-python = ">=3.12"
+dependencies = [
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
