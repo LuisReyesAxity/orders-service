@@ -1,0 +1,12 @@
+[
+  {
+    "id": "1",
+    "cliente": "Luis",
+    "total": 150.0
+  },
+  {
+    "id": "2",
+    "cliente": "Ana",
+    "total": 80.0
+  }
+]
