@@ -84,6 +84,14 @@ try:
 except Exception as e:
     print(f"Error capturado: {e}")
 
+
+
+
+
+
+
+
+
     # ---- HERENCIA - como herencia en C# ----
 # DiscountOrder hereda todo de Order y agrega descuento
 @dataclass
