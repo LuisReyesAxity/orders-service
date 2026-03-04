@@ -1,5 +1,6 @@
-from sqlalchemy import create_engine, Column, String
-from sqlalchemy.orm import sessionmaker, DeclarativeBase
+from sqlalchemy import Column, String, create_engine
+from sqlalchemy.orm import DeclarativeBase, sessionmaker
+
 from orders_service.domain.entities import Order, OrderStatus
 
 
@@ -47,11 +48,13 @@ class SQLAlchemyOrderRepository:
         if existing:
             existing.status = order.status.value
         else:
-            self.session.add(OrderModel(
-                id=order.id,
-                customer_id=order.customer_id,
-                status=order.status.value
-            ))
+            self.session.add(
+                OrderModel(
+                    id=order.id,
+                    customer_id=order.customer_id,
+                    status=order.status.value,
+                )
+            )
         self.session.commit()
 
     def get_by_id(self, order_id: str) -> Order | None:

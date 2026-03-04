@@ -1,4 +1,5 @@
 import uuid
+
 from orders_service.domain.entities import Order, OrderItem
 from orders_service.domain.ports.repository import OrderRepository
 
@@ -11,14 +12,18 @@ class OrderService:
         self.repository = repository
 
     def create_order(self, customer_id: str) -> Order:
-        order = Order(
-            id=str(uuid.uuid4()),
-            customer_id=customer_id
-        )
+        order = Order(id=str(uuid.uuid4()), customer_id=customer_id)
         self.repository.save(order)
         return order
 
-    def add_item(self, order_id: str, product_id: str, product_name: str, quantity: int, unit_price: float) -> Order:
+    def add_item(
+        self,
+        order_id: str,
+        product_id: str,
+        product_name: str,
+        quantity: int,
+        unit_price: float,
+    ) -> Order:
         order = self.repository.get_by_id(order_id)
         if order is None:
             raise ValueError(f"Orden {order_id} no encontrada")

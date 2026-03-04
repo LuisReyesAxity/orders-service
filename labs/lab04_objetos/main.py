@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from enum import Enum
+
 from pydantic import BaseModel
 
 
@@ -67,9 +68,7 @@ class OrderIn(BaseModel):
 print("\n--- Pydantic ---")
 orden = OrderIn(
     customer_id="cliente-1",
-    items=[
-        OrderItemIn(product_name="Widget", quantity=2, unit_price=10.0)
-    ]
+    items=[OrderItemIn(product_name="Widget", quantity=2, unit_price=10.0)],
 )
 print(f"Orden recibida: {orden}")
 
@@ -79,17 +78,10 @@ try:
     orden_mala = OrderItemIn(
         product_name="Widget",
         quantity="no soy un número",  # error a propósito
-        unit_price=10.0
+        unit_price=10.0,
     )
 except Exception as e:
     print(f"Error capturado: {e}")
-
-
-
-
-
-
-
 
 
     # ---- HERENCIA - como herencia en C# ----
@@ -128,12 +120,13 @@ class Product:
 print("\n--- Dunder methods ---")
 p1 = Product("Widget", 10.0)
 p2 = Product("Gadget", 25.0)
-print(p1)                           # llama __str__ automáticamente
-print(f"Son iguales: {p1 == p2}")   # llama __eq__ automáticamente
+print(p1)  # llama __str__ automáticamente
+print(f"Son iguales: {p1 == p2}")  # llama __eq__ automáticamente
 
 # ---- ATTRS ----
 # Similar a dataclass pero con más opciones de validación
 import attr
+
 
 @attr.s
 class Customer:

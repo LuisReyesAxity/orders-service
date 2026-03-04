@@ -1,3 +1,4 @@
+#herramientas para calidad de codigo,se ejecuta antes de cada commit
 repos:
   - repo: https://github.com/psf/black
     rev: 26.1.0

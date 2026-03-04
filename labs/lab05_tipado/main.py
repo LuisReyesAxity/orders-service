@@ -6,9 +6,11 @@ from typing import Optional, Union
 def saludar(nombre):
     return "Hola " + nombre
 
+
 # Con tipo - como C#, más claro
 def saludar_tipado(nombre: str) -> str:
     return "Hola " + nombre
+
 
 print(saludar_tipado("Luis"))
 
@@ -19,8 +21,9 @@ def buscar_orden(id: str) -> Optional[str]:
     ordenes = {"1": "Orden de Luis", "2": "Orden de Ana"}
     return ordenes.get(id)
 
+
 print("\n--- Optional ---")
-print(buscar_orden("1"))   # encuentra la orden
+print(buscar_orden("1"))  # encuentra la orden
 print(buscar_orden("99"))  # retorna None
 
 
@@ -30,6 +33,7 @@ def procesar(valor: Union[int, str]) -> str:
     if isinstance(valor, int):
         return f"Es un número: {valor}"
     return f"Es texto: {valor}"
+
 
 print("\n--- Union ---")
 print(procesar(42))
@@ -41,12 +45,15 @@ print(procesar("hola"))
 def filtrar_mayores(numeros: list[int], minimo: int) -> list[int]:
     return [n for n in numeros if n >= minimo]
 
+
 print("\n--- Lista tipada ---")
 print(filtrar_mayores([1, 5, 3, 8, 2], 4))
+
 
 # ---- ERROR DE TIPOS - mypy lo detecta ----
 def sumar(a: int, b: int) -> int:
     return a + b
+
 
 # Esto está mal - mandamos string en vez de int
 resultado = sumar("hola", 2)

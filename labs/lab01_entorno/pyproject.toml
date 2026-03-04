@@ -1,4 +1,4 @@
-[project]
+[project]#Propiedades del Proyecto
 name = "lab01-entorno"
 version = "0.1.0"
 description = "Lab 01 - Entorno y herramientas"
@@ -10,6 +10,6 @@ dependencies = [
 ]
 
 
-[build-system]
+[build-system] #Motor de Compilación
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"

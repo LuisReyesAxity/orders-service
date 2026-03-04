@@ -1,5 +1,6 @@
-import httpx
 import logging
+
+import httpx
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -34,7 +35,6 @@ if response.status_code == 404:
     print("Post no encontrado")
 else:
     print(f"Status: {response.status_code}")
-
 
     # ---- REINTENTOS ----
 print("\n--- Reintentos ---")

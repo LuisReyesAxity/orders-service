@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import Depends, FastAPI, HTTPException
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import jwt
 from passlib.context import CryptContext
@@ -6,7 +6,6 @@ from pydantic import BaseModel
 
 from orders_service.application.use_cases import OrderService
 from orders_service.infrastructure.repository import SQLAlchemyOrderRepository
-
 
 # ---- JWT CONFIG ----
 SECRET_KEY = "mi-clave-secreta"
@@ -22,12 +21,7 @@ repository = SQLAlchemyOrderRepository()
 service = OrderService(repository)
 
 # Usuarios simulados
-usuarios_db = {
-    "luis": {
-        "username": "luis",
-        "password": pwd_context.hash("1234")
-    }
-}
+usuarios_db = {"luis": {"username": "luis", "password": pwd_context.hash("1234")}}
 
 
 # ---- FUNCIONES JWT ----
@@ -70,30 +64,59 @@ def login(form: OAuth2PasswordRequestForm = Depends()):
 
 
 @app.post("/orders")
-def create_order(request: CreateOrderRequest, usuario: str = Depends(obtener_usuario_actual)):
+def create_order(
+    request: CreateOrderRequest, usuario: str = Depends(obtener_usuario_actual)
+):
     order = service.create_order(request.customer_id)
-    return {"id": order.id, "customer_id": order.customer_id, "status": order.status.value}
+    return {
+        "id": order.id,
+        "customer_id": order.customer_id,
+        "status": order.status.value,
+    }
 
 
 @app.get("/orders")
 def get_all_orders(usuario: str = Depends(obtener_usuario_actual)):
     orders = service.get_all_orders()
-    return [{"id": o.id, "customer_id": o.customer_id, "status": o.status.value, "total": o.total()} for o in orders]
+    return [
+        {
+            "id": o.id,
+            "customer_id": o.customer_id,
+            "status": o.status.value,
+            "total": o.total(),
+        }
+        for o in orders
+    ]
 
 
 @app.get("/orders/{order_id}")
 def get_order(order_id: str, usuario: str = Depends(obtener_usuario_actual)):
     try:
         order = service.get_order(order_id)
-        return {"id": order.id, "customer_id": order.customer_id, "status": order.status.value, "total": order.total()}
+        return {
+            "id": order.id,
+            "customer_id": order.customer_id,
+            "status": order.status.value,
+            "total": order.total(),
+        }
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
 
 
 @app.post("/orders/{order_id}/items")
-def add_item(order_id: str, request: AddItemRequest, usuario: str = Depends(obtener_usuario_actual)):
+def add_item(
+    order_id: str,
+    request: AddItemRequest,
+    usuario: str = Depends(obtener_usuario_actual),
+):
     try:
-        order = service.add_item(order_id, request.product_id, request.product_name, request.quantity, request.unit_price)
+        order = service.add_item(
+            order_id,
+            request.product_id,
+            request.product_name,
+            request.quantity,
+            request.unit_price,
+        )
         return {"id": order.id, "total": order.total()}
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))

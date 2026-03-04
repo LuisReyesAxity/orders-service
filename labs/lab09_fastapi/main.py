@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import Depends, FastAPI, HTTPException
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import jwt
 from passlib.context import CryptContext
@@ -19,12 +19,7 @@ app = FastAPI(title="Orders API con JWT")
 
 # ---- USUARIOS - simulados en memoria ----
 # En producción estarían en la DB
-usuarios_db = {
-    "luis": {
-        "username": "luis",
-        "password": pwd_context.hash("1234")
-    }
-}
+usuarios_db = {"luis": {"username": "luis", "password": pwd_context.hash("1234")}}
 
 
 # ---- FUNCIONES DE AUTENTICACIÓN ----
@@ -42,9 +37,10 @@ def obtener_usuario_actual(token: str = Depends(oauth2_scheme)) -> str:
         return payload.get("sub")
     except Exception:
         raise HTTPException(status_code=401, detail="Token inválido")
-    
 
     # ---- SCHEMAS ----
+
+
 class OrderRequest(BaseModel):
     customer_id: str
 
@@ -66,4 +62,7 @@ def get_orders(usuario: str = Depends(obtener_usuario_actual)):
 
 @app.post("/orders")
 def create_order(request: OrderRequest, usuario: str = Depends(obtener_usuario_actual)):
-    return {"message": f"Orden creada por {usuario}", "customer_id": request.customer_id}
+    return {
+        "message": f"Orden creada por {usuario}",
+        "customer_id": request.customer_id,
+    }

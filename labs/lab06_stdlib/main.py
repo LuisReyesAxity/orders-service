@@ -1,9 +1,8 @@
-import json
 import csv
+import json
 import logging
-from pathlib import Path
 from datetime import datetime
-
+from pathlib import Path
 
 # ---- LOGGING - como ILogger en C# ----
 logging.basicConfig(level=logging.INFO)

@@ -1,5 +1,5 @@
-from sqlalchemy import create_engine, Column, String
-from sqlalchemy.orm import sessionmaker, DeclarativeBase
+from sqlalchemy import Column, String, create_engine
+from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
 # Conexión a la base de datos
 engine = create_engine("sqlite:///orders.db")

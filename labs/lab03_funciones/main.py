@@ -1,5 +1,5 @@
-import time
 import random
+import time
 from contextlib import contextmanager
 
 
@@ -22,6 +22,7 @@ def reintentar(func):
             except Exception as e:
                 print(f"Intento {intento} fallido: {e}")
         print("Falló después de 3 intentos")
+
     return wrapper
 
 
@@ -41,7 +42,7 @@ if resultado:
 # ---- GENERADOR POR LOTES ----
 def lotes(lista: list, tamanio: int):
     for i in range(0, len(lista), tamanio):
-        yield lista[i:i + tamanio]
+        yield lista[i : i + tamanio]
 
 
 ordenes = list(range(1, 11))
@@ -69,7 +70,7 @@ with temporizar("Procesar órdenes"):
     print("Procesando...")
 
 
-'''
+"""
 # En vez de hacer esto:
 def doble(x):
     return x * 2
@@ -83,4 +84,4 @@ contar()  # recuerda: 1
 contar()  # recuerda: 2
 contar()  # recuerda: 3
 
-'''
+"""

@@ -1,6 +1,5 @@
 import json
 
-
 # ---- TIPOS BÁSICOS ----
 # En C#: string, int, bool, float
 # En Python es igual pero sin declarar el tipo
@@ -16,9 +15,9 @@ print(f"Sistema: {nombre} v{version}")  # f-string = string interpolation de C#
 # Simulamos órdenes como lista de diccionarios
 ordenes = [
     {"id": 1, "cliente": "Luis", "total": 150.0, "status": "pending"},
-    {"id": 2, "cliente": "Ana",  "total": 80.0,  "status": "confirmed"},
+    {"id": 2, "cliente": "Ana", "total": 80.0, "status": "confirmed"},
     {"id": 3, "cliente": "Juan", "total": 200.0, "status": "pending"},
-    {"id": 4, "cliente": "Maria","total": 50.0,  "status": "cancelled"},
+    {"id": 4, "cliente": "Maria", "total": 50.0, "status": "cancelled"},
 ]
 
 
@@ -61,7 +60,8 @@ def cargar_ordenes(ruta: str) -> list:
 resultado = cargar_ordenes("ordenes.json")
 print(f"\nÓrdenes desde archivo: {resultado}")
 
-# despues de esto ya existe ya lo aghregue entonces ya nop hay errores, LRL
+# despues de esto ya existe ya lo agregue entonces ya nop hay errores, LRL
+
 
 # ---- PATTERN MATCHING (switch de C#) ----
 def describir_status(status: str) -> str:
