@@ -11,7 +11,7 @@ class OrderStatus(Enum):
     CANCELLED = "cancelled"
 
 
-# ---- DATACLASS - como record en C# ----
+# ---- DATACLASS - como record en C# ----Estudiar Records
 @dataclass
 class OrderItem:
     product_name: str
