@@ -1,54 +1,47 @@
-from sqlalchemy import create_engine, Column, String, Float, Integer, Enum as SAEnum
+from sqlalchemy import create_engine, Column, String
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
-# Crear conexión a la base de datos
+# Conexión a la base de datos
 engine = create_engine("sqlite:///orders.db")
-
-# Crear sesión - como DbContext en C#
 SessionLocal = sessionmaker(bind=engine)
 
 
-# Base para todos los modelos - como DbContext en EF
+# Base para todos los modelos
 class Base(DeclarativeBase):
     pass
 
-# Modelo - como una entidad en EF
+
+# Modelo
 class OrderModel(Base):
     __tablename__ = "orders"
-    
+
     id = Column(String, primary_key=True)
     customer_id = Column(String, nullable=False)
     status = Column(String, default="pending")
 
 
-
-    # Crear tablas en la DB
+# Crear tablas
 Base.metadata.create_all(engine)
 
-# Abrir sesión - como using(var context = new DbContext())
-session = SessionLocal()
 
-# Crear una orden
-nueva_orden = OrderModel(id="2", customer_id="cliente-1", status="pending")
+# Solo ejecuta el CRUD si corres este archivo directamente
+if __name__ == "__main__":
+    session = SessionLocal()
 
-# Guardar en DB
-session.add(nueva_orden)
-session.commit()
+    nueva_orden = OrderModel(id="3", customer_id="cliente-1", status="pending")
+    session.add(nueva_orden)
+    session.commit()
 
-# Consultar
-orden = session.query(OrderModel).filter_by(id="1").first()
-print(f"Orden encontrada: {orden.customer_id} - {orden.status}")
+    orden = session.query(OrderModel).filter_by(id="3").first()
+    print(f"Orden encontrada: {orden.customer_id} - {orden.status}")
 
-# Actualizar
-orden.status = "confirmed"
-session.commit()
-print(f"Status actualizado: {orden.status}")
+    orden.status = "confirmed"
+    session.commit()
+    print(f"Status actualizado: {orden.status}")
 
-# Eliminar
-session.delete(orden)
-session.commit()
-print("Orden eliminada")
+    session.delete(orden)
+    session.commit()
+    print("Orden eliminada")
 
-# Verificar que ya no existe
-orden_eliminada = session.query(OrderModel).filter_by(id="1").first()
-print(f"Orden después de eliminar: {orden_eliminada}")
+    orden_eliminada = session.query(OrderModel).filter_by(id="3").first()
+    print(f"Orden después de eliminar: {orden_eliminada}")
