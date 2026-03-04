@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, Column, String
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
-from orders_service.domain.entities import Order, OrderItem, OrderStatus
+from orders_service.domain.entities import Order, OrderStatus
 
 
 # Base para modelos SQLAlchemy
